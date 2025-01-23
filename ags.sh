@@ -47,6 +47,24 @@ install_ags() {
     # Copy the new AGS configuration
     v cp -r ".config/ags" "$HOME/.config/ags"
 
+    if [ -d "$HOME/.config/fuzzel" ]; then
+        echo "Existing AGS configuration found. Creating backup..."
+        v mv "$HOME/.config/fuzzel" "$HOME/.config/backup-fuzzel"
+    fi
+    
+    v cp -r ".config/fuzzel" "$HOME/.config/fuzzel"
+
+    if [ -d "$HOME/.local/bin/fuzzel-emoji" ]; then
+        echo "Existing AGS configuration found. Creating backup..."
+        v mv "$HOME/.local/bin/fuzzel-emoji" "$HOME/.local/bin/fuzzel-emoji"
+    fi
+    v cp "./local/bin/fuzzel-emoji" "~/.local/bin"  
+    if [ -d "$HOME/.local/bin/rubyshot" ]; then
+        echo "Existing AGS configuration found. Creating backup..."
+        v mv "$HOME/.local/bin/rubyshot" "$HOME/.local/bin/rubyshot"
+    fi
+    v cp "./local/bin/rubyshot" "~/.local/bin"
+
     echo "AGS installation completed!"
 }
 
