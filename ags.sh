@@ -171,13 +171,13 @@ sudo pacman -S wget
 sudo pacman -S webp-pixbuf-loader
 sudo pacman -S wf-recorder
 sudo pacman -S wl-clipboard
-sudo pacman -S wlogout
 sudo pacman -S xdg-desktop-portal
 sudo pacman -S xdg-desktop-portal-gtk
 sudo pacman -S xdg-user-dirs
 sudo pacman -S xdg-user-dirs-gtk
 sudo pacman -S yad
 sudo pacman -S ydotool
+yay -S wlogout
 yay -S adw-gtk-theme
 yay -S aquamarine
 yay -S anyrun-git
@@ -250,17 +250,54 @@ install_ags() {
     install_yay
 
     # List of packages you want to install
-    selected_packages=("package1" "package2" "package3")  # Replace with actual package names
+    # selected_packages=("package1" "package2" "package3")  # Replace with actual package names
 
     # Install selected packages
-    echo "Installing selected packages..."
-    for package in "${selected_packages[@]}"; do
-        install_package "$SCRIPT_DIR/arch-packages/$package"
-    done
+    #echo "Installing selected packages..."
+    #for package in "${selected_packages[@]}"; do
+    #    install_package "$SCRIPT_DIR/arch-packages/$package"
+    #done
 
     # Install additional dependencies you might need (if required)
-    echo "Installing additional dependencies..."
-    v yay -S --needed ddcutil i2c-tools typescript npm gjs gtk3 gtk-layer-shell gnome-bluetooth-3.0 upower networkmanager gobject-introspection libdbusmenu-gtk3 libsoup3
+    #echo "Installing additional dependencies..."
+    #v yay -S --needed ddcutil i2c-tools typescript npm gjs gtk3 gtk-layer-shell gnome-bluetooth-3.0 upower networkmanager gobject-introspection libdbusmenu-gtk3 libsoup3
+
+    # Configure AGS
+    echo "Configuring AGS..."
+    
+    # Check if the ags directory already exists
+    if [ -d "$HOME/.config/ags" ]; then
+        echo "Existing AGS configuration found. Creating backup..."
+        v mkdir "$HOME/.config/backup-ags"
+        v cp -r "$HOME/.config/ags/" "$HOME/.config/backup-ags"
+        v rm -rf "$HOME/.config/ags"
+    fi
+
+    # Copy the new AGS configuration
+    v cp -r "$SCRIPT_DIR/.config/ags" "$HOME/.config/"
+
+    if [ -d "$HOME/.config/fuzzel" ]; then
+        echo "Existing fuzzel configuration found. Creating backup..."
+        v mkdir "$HOME/.config/backup-fuzzel"
+        v cp -r "$HOME/.config/fuzzel/" "$HOME/.config/backup-fuzzel"
+        v rm -rf "$HOME/.config/fuzzel"
+    fi
+    
+    v cp -r "$SCRIPT_DIR/.config/fuzzel/" "$HOME/.config/"
+
+    if [ -d "$HOME/.local/bin/fuzzel-emoji" ]; then
+        echo "Existing fuzzel-emoji found. Creating backup..."
+        v mv "$HOME/.local/bin/fuzzel-emoji" "$HOME/.local/bin/fuzzel-emoji"
+    fi
+    
+    v cp "$SCRIPT_DIR/.local/bin/fuzzel-emoji" "$HOME/.local"
+
+    if [ -d "$HOME/.local/bin/rubyshot" ]; then
+        echo "Existing rubyshot found. Creating backup..."
+        v mv "$HOME/.local/bin/rubyshot" "$HOME/.local/bin/rubyshot"
+    fi
+    
+    v cp "$SCRIPT_DIR/.local/bin/rubyshot" "$HOME/.local"
 
     echo "AGS installation completed!"
 }
@@ -270,8 +307,6 @@ install_ags
 
 echo "You can now start AGS by running 'ags' in the terminal."
 
-clear
+#echo "Only install the packages from the following options, don't copy the dot files."
 
-echo "Only install the packages from the following options, don't copy the dot files."
-
-bash <(curl -s https://raw.githubusercontent.com/mylinuxforwork/dotfiles/main/setup-arch.sh)
+#bash <(curl -s https://raw.githubusercontent.com/mylinuxforwork/dotfiles/main/setup-arch.sh)
