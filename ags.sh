@@ -13,8 +13,8 @@ chmod +x install.sh
 set -e
 
 sudo pacman -S greetd
-sudo pacman -S libsoup3
-sudo pacman -S libnotify
+#sudo pacman -S libsoup3
+#sudo pacman -S libnotify
 sudo pacman -S power-profiles-daemon
 sudo pacman -S plasma-browser-integration
 sudo pacman -S axel
@@ -31,74 +31,74 @@ sudo pacman -S fontconfig
 sudo pacman -S foot
 sudo pacman -S fuzzel
 sudo pacman -S gammastep
-sudo pacman -S glib2
-sudo pacman -S glib2-devel
-sudo pacman -S glibc
-sudo pacman -S gnome-bluetooth
+#sudo pacman -S glib2
+#sudo pacman -S glib2-devel
+#sudo pacman -S glibc
+#sudo pacman -S gnome-bluetooth
 sudo pacman -S gnome-control-center
-sudo pacman -S gnome-keyring
-sudo pacman -S gjs
-sudo pacman -S gobject-introspection
-sudo pacman -S grim
-sudo pacman -S gtksourceview3
-sudo pacman -S gtk-layer-shell
-sudo pacman -S gtk3
-sudo pacman -S jq
-sudo pacman -S meson
-sudo pacman -S networkmanager
-sudo pacman -S npm
-sudo pacman -S pavucontrol
-sudo pacman -S playerctl
+#sudo pacman -S gnome-keyring
+#sudo pacman -S gjs
+#sudo pacman -S gobject-introspection
+#sudo pacman -S grim
+#sudo pacman -S gtksourceview3
+#sudo pacman -S gtk-layer-shell
+#sudo pacman -S gtk3
+#sudo pacman -S jq
+#sudo pacman -S meson
+#sudo pacman -S networkmanager
+#sudo pacman -S npm
+#sudo pacman -S pavucontrol
+#sudo pacman -S playerctl
 sudo pacman -S polkit-gnome
-sudo pacman -S python-build
+#sudo pacman -S python-build
 sudo pacman -S python-pillow
 sudo pacman -S python-psutil
 sudo pacman -S python-pywal
 sudo pacman -S python-pywayland
 sudo pacman -S python-setuptools-scm
-sudo pacman -S python-wheel
-sudo pacman -S qt5-wayland
-sudo pacman -S qt5ct
-sudo pacman -S ripgrep
+#sudo pacman -S python-wheel
+#sudo pacman -S qt5-wayland
+#sudo pacman -S qt5ct
+#sudo pacman -S ripgrep
 sudo pacman -S rsync
-sudo pacman -S slurp
+#sudo pacman -S slurp
 sudo pacman -S starship
-sudo pacman -S swww
-sudo pacman -S swappy
+#sudo pacman -S swww
+#sudo pacman -S swappy
 sudo pacman -S tesseract
 sudo pacman -S tesseract-data-eng
 sudo pacman -S tinyxml2
-sudo pacman -S upower
-sudo pacman -S wget
-sudo pacman -S webp-pixbuf-loader
+#sudo pacman -S upower
+#sudo pacman -S wget
+#sudo pacman -S webp-pixbuf-loader
 sudo pacman -S wf-recorder
-sudo pacman -S wl-clipboard
-sudo pacman -S xdg-desktop-portal
-sudo pacman -S xdg-desktop-portal-gtk
-sudo pacman -S xdg-user-dirs
-sudo pacman -S xdg-user-dirs-gtk
-sudo pacman -S yad
+#sudo pacman -S wl-clipboard
+#sudo pacman -S xdg-desktop-portal
+#sudo pacman -S xdg-desktop-portal-gtk
+#sudo pacman -S xdg-user-dirs
+#sudo pacman -S xdg-user-dirs-gtk
+#sudo pacman -S yad
 sudo pacman -S ydotool
-yay -S wlogout
+#yay -S wlogout
 yay -S adw-gtk-theme
-yay -S aquamarine
+#yay -S aquamarine
 yay -S anyrun-git
 yay -S dart-sass
-yay -S hyprcursor
-yay -S hyprgraphics
-yay -S hypridle
-yay -S hyprlang
-yay -S hyprlock
+#yay -S hyprcursor
+#yay -S hyprgraphics
+#yay -S hypridle
+#yay -S hyprlang
+#yay -S hyprlock
 yay -S hyprpicker
-yay -S hyprutils
-yay -S hyprwayland-scanner
+#yay -S hyprutils
+#yay -S hyprwayland-scanner
 yay -S ttf-gabarito-git
-yay -S ttf-jetbrains-mono-nerd
+#yay -S ttf-jetbrains-mono-nerd
 yay -S ttf-material-symbols-variable-git
 yay -S ttf-readex-pro
 yay -S ttf-rubik-vf
 yay -S ttf-space-mono-nerd
-yay -S xdg-desktop-portal-hyprland
+#yay -S xdg-desktop-portal-hyprland
 yay -S illogical-impulse-oneui4-icons-git
 yay -S python-materialyoucolor-git
 yay -S gradience
