@@ -1,0 +1,304 @@
+# Modified from AUR package "aylurs-gtk-shell-git" maintained by kotontrion <kotontrion@tutanota.de>
+pkgname=illogical-impulse-ags
+_pkgname=ags
+pkgver=r525.05e0f23
+pkgrel=1
+pkgdesc="Aylurs's Gtk Shell (AGS), version fixed for illogical-impulse dotfiles."
+arch=('x86_64')
+url="https://github.com/Aylur/ags"
+license=('GPL3')
+makedepends=('git' 'gobject-introspection' 'meson' 'npm' 'typescript')
+depends=('gjs' 'glib2' 'glib2-devel' 'glibc' 'gtk3' 'gtk-layer-shell' 'libpulse' 'pam')
+optdepends=('gnome-bluetooth-3.0: required for bluetooth service'
+            'greetd: required for greetd service'
+            'libdbusmenu-gtk3: required for systemtray service'
+            'libsoup3: required for the Utils.fetch feature'
+            'libnotify: required for sending notifications'
+            'networkmanager: required for network service'
+            'power-profiles-daemon: required for powerprofiles service'
+            'upower: required for battery service')
+conflicts=('aylurs-gtk-shell' 'aylurs-gtk-shell-git')
+backup=('etc/pam.d/ags')
+source=("git+${url}.git#commit=05e0f23534fa30c1db2a142664ee8f71e38db260"
+        "git+https://gitlab.gnome.org/GNOME/libgnome-volume-control")
+sha256sums=('SKIP'
+            'SKIP')
+
+pkgver(){
+  cd $srcdir/$_pkgname
+  printf 'r%s.%s' "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)"
+}
+
+prepare() {
+  cd $srcdir/$_pkgname
+  git submodule init
+  git config submodule.subprojects/gvc.url "$srcdir/libgnome-volume-control"
+  git -c protocol.file.allow=always submodule update
+}
+
+build() {
+  cd $srcdir/$_pkgname
+  npm install
+  arch-meson build --libdir "lib/$_pkgname" -Dbuild_types=true
+  meson compile -C build
+}
+
+package() {
+  cd $srcdir/$_pkgname
+  meson install -C build --destdir "$pkgdir"
+  ln -sf /usr/share/com.github.Aylur.ags/com.github.Aylur.ags ${pkgdir}/usr/bin/ags
+}
+pkgname=illogical-impulse-audio
+pkgver=1.0
+pkgrel=1
+pkgdesc='Illogical Impulse Audio Dependencies'
+arch=(any)
+license=(None)
+depends=(
+	pavucontrol
+	wireplumber
+	libdbusmenu-gtk3
+	playerctl
+	swww
+)
+
+pkgname=illogical-impulse-backlight
+pkgver=1.0
+pkgrel=1
+pkgdesc='Illogical Impulse Backlight Dependencies'
+arch=(any)
+license=(None)
+depends=(
+	brightnessctl
+	ddcutil
+)
+
+pkgname=illogical-impulse-basic
+pkgver=1.0
+pkgrel=1
+pkgdesc='Illogical Impulse Basic Dependencies'
+arch=(any)
+license=(None)
+depends=(
+	axel
+	bc
+	coreutils
+	cliphist
+	cmake
+	curl
+	fuzzel
+	rsync
+	wget
+	ripgrep
+	jq
+	npm
+	meson
+	typescript
+	gjs
+	xdg-user-dirs
+)
+pkgname=illogical-impulse-bibata-modern-classic-bin
+pkgver=2.0.6
+pkgrel=1
+pkgdesc="Material Based Cursor Theme, installed for illogical-impulse dotfiles"
+arch=('any')
+url="https://github.com/ful1e5/Bibata_Cursor"
+license=('GPL-3.0-or-later')
+conflicts=("bibata-cursor-theme" "bibata-cursor-theme-bin")
+options=('!strip')
+_variant=Bibata-Modern-Classic
+source=("${pkgname%-bin}-$pkgver.tar.xz::$url/releases/download/v$pkgver/$_variant.tar.xz")
+sha256sums=('SKIP')
+
+package() {
+  install -dm755 "$pkgdir/usr/share/icons"
+  cp -dr --no-preserve=mode $_variant "$pkgdir/usr/share/icons"
+}
+pkgname=illogical-impulse-fonts-themes
+pkgver=1.0
+pkgrel=1
+pkgdesc='Illogical Impulse Fonts and Theming Dependencies'
+arch=(any)
+license=(None)
+depends=(
+    adw-gtk-theme-git
+	qt5ct
+	qt5-wayland
+	fontconfig
+	ttf-readex-pro
+	ttf-jetbrains-mono-nerd
+	ttf-material-symbols-variable-git
+	ttf-space-mono-nerd
+	ttf-rubik-vf
+    ttf-gabarito-git
+	fish
+	foot
+	starship
+)
+
+pkgname=illogical-impulse-gnome
+pkgver=1.0
+pkgrel=1
+pkgdesc='Illogical Impulse GNOME Dependencies'
+arch=(any)
+license=(None)
+depends=(
+	polkit-gnome
+	gnome-keyring
+	gnome-control-center
+	blueberry networkmanager
+	gammastep
+	gnome-bluetooth-3.0
+)
+
+pkgname=illogical-impulse-microtex-git
+_pkgname=MicroTeX
+pkgver=r494.0e3707f
+pkgrel=1
+pkgdesc='MicroTeX for illogical-impulse dotfiles.'
+#pkgdesc="A dynamic, cross-platform, and embeddable LaTeX rendering library"
+arch=("x86_64")
+url="https://github.com/NanoMichael/${_pkgname}"
+license=('MIT')
+depends=(
+	tinyxml2
+	gtkmm3
+	gtksourceviewmm
+	cairomm
+)
+makedepends=("git" "cmake")
+source=("git+${url}.git")
+sha256sums=("SKIP")
+
+pkgver() {
+  cd $_pkgname
+  printf "r%s.%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)"
+}
+
+build() {
+  cd $_pkgname
+  cmake -B build -S . -DCMAKE_BUILD_TYPE=None
+  cmake --build build
+}
+
+package() {
+  cd $_pkgname
+  install -Dm0755 -t "$pkgdir/opt/$_pkgname/" build/LaTeX
+  cp -r build/res "$pkgdir/opt/$_pkgname/"
+  install -Dm0644 -t "$pkgdir/usr/share/licenses/$pkgname/" LICENSE
+}
+pkgname=illogical-impulse-gtk
+pkgver=1.0
+pkgrel=1
+pkgdesc='Illogical Impulse GTK Dependencies'
+arch=(any)
+license=(None)
+depends=(
+	webp-pixbuf-loader
+	gtk-layer-shell
+	gtk3
+	gtksourceview3
+	gobject-introspection
+	upower
+	yad
+	ydotool
+	xdg-user-dirs-gtk
+)
+
+pkgname=illogical-impulse-oneui4-icons-git
+_pkgname=OneUI4-Icons
+pkgver=r64.9ba2190
+pkgrel=1
+pkgdesc="A fork of mjkim0727/OneUI4-Icons for illogical-impulse dotfiles."
+arch=('x86_64')
+url="https://github.com/end-4/OneUI4-Icons"
+license=('GPL3')
+source=("git+${url}.git")
+sha256sums=('SKIP')
+options=('!strip')
+
+pkgver(){
+  cd $srcdir/$_pkgname
+  printf 'r%s.%s' "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)"
+}
+
+package() {
+  cd $srcdir/$_pkgname
+  install -dm755 "$pkgdir/usr/share/icons"
+  for _i in OneUI{,-dark,-light}; do
+    cp -dr --no-preserve=mode "$_i" "$pkgdir/usr/share/icons/$_i"
+  done
+}
+pkgname=illogical-impulse-portal
+pkgver=1.0
+pkgrel=1
+pkgdesc='Illogical Impulse XDG Desktop Portals'
+arch=(any)
+license=(None)
+depends=(
+	xdg-desktop-portal
+	xdg-desktop-portal-gtk
+	xdg-desktop-portal-hyprland-git
+)
+
+pkgname=illogical-impulse-pymyc-aur
+pkgver=1.0
+pkgrel=1
+pkgdesc='Illogical Impulse PyMYC Dependencies'
+arch=(any)
+license=(None)
+depends=(
+	python-materialyoucolor-git
+	gradience
+	python-libsass
+	python-material-color-utilities
+)
+
+pkgname=illogical-impulse-python
+pkgver=1.0
+pkgrel=1
+pkgdesc='Illogical Impulse Python Dependencies'
+arch=(any)
+license=(None)
+depends=(
+	python-build
+	python-pillow
+	python-pywal
+	python-setuptools-scm
+	python-wheel
+)
+
+pkgname=illogical-impulse-screencapture
+pkgver=1.0
+pkgrel=1
+pkgdesc='Illogical Impulse Screenshot and Recording Dependencies'
+arch=(any)
+license=(None)
+depends=(
+	swappy
+	wf-recorder
+	grim
+	tesseract
+	tesseract-data-eng
+	slurp
+)
+
+pkgname=illogical-impulse-widgets
+pkgver=1.0
+pkgrel=1
+pkgdesc='Illogical Impulse Widget Dependencies'
+arch=(any)
+license=(None)
+depends=(
+	dart-sass
+	python-pywayland
+	python-psutil
+	hypridle-git
+ 	hyprutils-git
+	hyprlock-git
+	wlogout
+	wl-clipboard
+	hyprpicker-git
+	anyrun-git
+)
+
