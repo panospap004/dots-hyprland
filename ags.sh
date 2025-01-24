@@ -99,7 +99,6 @@ yay -S ttf-readex-pro
 yay -S ttf-rubik-vf
 yay -S ttf-space-mono-nerd
 yay -S xdg-desktop-portal-hyprland
-yay -S illogical-impulse-bibata-modern-classic-bin
 yay -S illogical-impulse-oneui4-icons-git
 yay -S python-materialyoucolor-git
 yay -S gradience
