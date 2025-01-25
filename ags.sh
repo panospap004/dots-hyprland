@@ -1,6 +1,9 @@
 #!/usr/bin/env bash
 #need to enable NetorkManager
 #inverd is in shaders folder inside hypr
+#need to disable swaync so the ags notification work:
+#systemctl --user disable swaync.service 
+#
 # Get the directory where the script is located (in case it's run from anywhere)
 SCRIPT_DIR=$(dirname "$(realpath "$0")")
 
