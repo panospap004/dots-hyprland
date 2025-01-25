@@ -2,8 +2,15 @@
 #need to enable NetorkManager
 #inverd is in shaders folder inside hypr
 #need to disable swaync so the ags notification work:
+#systemctl --user stop swaync.service 
 #systemctl --user disable swaync.service 
-#
+#systemctl --user mask swaync.service
+# if i want to ever re enable it i run
+#systemctl --user unmask swaync.service
+#systemctl --user enable swaync.service
+#systemctl --user start swaync.service 
+
+
 # Get the directory where the script is located (in case it's run from anywhere)
 SCRIPT_DIR=$(dirname "$(realpath "$0")")
 
