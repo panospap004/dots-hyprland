@@ -217,6 +217,12 @@ install_ags() {
     v cp "$SCRIPT_DIR/.local/bin/rubyshot" "$HOME/.local"
 
     echo "AGS installation completed!"
+
+    
+    v sudo usermod -aG video,i2c,input "$(whoami)"
+    v bash -c "echo i2c-dev | sudo tee /etc/modules-load.d/i2c-dev.conf"
+    v systemctl --user enable ydotool --now
+
 }
 
 # Run the installation
