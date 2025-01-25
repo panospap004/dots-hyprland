@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
-
+#need to enable NetorkManager
+#inverd is in shaders folder inside hypr
 # Get the directory where the script is located (in case it's run from anywhere)
 SCRIPT_DIR=$(dirname "$(realpath "$0")")
 
