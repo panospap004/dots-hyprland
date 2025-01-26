@@ -119,6 +119,7 @@ yay -S python-materialyoucolor-git
 yay -S gradience
 yay -S python-libsass
 yay -S python-material-color-utilities
+hyprpm update
 hyprpm add https://github.com/pyt0xic/hyprfocus
 # Function to execute commands verbosely
 v() {
