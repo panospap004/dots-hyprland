@@ -121,6 +121,9 @@ yay -S python-libsass
 yay -S python-material-color-utilities
 hyprpm update
 hyprpm add https://github.com/pyt0xic/hyprfocus
+hyprpm enable hyprfocus
+hyprpm reload
+hyprpm update
 # Function to execute commands verbosely
 v() {
     echo "Executing: $@"
