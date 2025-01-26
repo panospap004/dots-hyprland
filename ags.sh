@@ -90,6 +90,10 @@ sudo pacman -S wf-recorder
 #sudo pacman -S xdg-user-dirs-gtk
 #sudo pacman -S yad
 sudo pacman -S ydotool
+sudo pacman -S cmake 
+sudo pacman -S meson 
+sudo pacman -S cpio 
+sudo pacman -S pkg-config
 #yay -S wlogout
 yay -S adw-gtk-theme
 #yay -S aquamarine
@@ -115,7 +119,7 @@ yay -S python-materialyoucolor-git
 yay -S gradience
 yay -S python-libsass
 yay -S python-material-color-utilities
-
+hyprpm add https://github.com/pyt0xic/hyprfocus
 # Function to execute commands verbosely
 v() {
     echo "Executing: $@"
